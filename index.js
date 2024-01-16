@@ -18,17 +18,14 @@ let fishwarts = {
     zipcode: "FW99999",
     city: "Fishtown",
     fireTeacher: function(teacher) {
-        const count = teacher.subjects.length
-        for (let i = 0; i < count; i++) {
-            console.log("fire!!!")
-            teacher.quitSubject(teacher.subjects[i])
+        while (teacher.subjects.length !== 0) {
+            teacher.quitSubject(teacher.subjects[0])
         }
-        console.log("splice!!!")
         this.teachers.splice(this.teachers.indexOf(teacher), 1)
     },
     relegateStudent: function(student) {
-        for (subject in teacher.subjects) {
-            student.quitSubject(subject)
+        while (student.subjects.length !== 0) {
+            student.quitSubject(student.subjects[0])
         }
         this.students.splice(this.students.indexOf(student), 1)
     },
@@ -88,6 +85,7 @@ let blobert = {
     age: "17",
     gender: 1,
     subjects: [],
+    grades: [],
     enlistToSubject: function(subject) {
         this.subjects.push(subject)
         subject.students.push(this)
@@ -97,6 +95,16 @@ let blobert = {
         this.subjects.splice(this.subjects.indexOf(subject), 1)
         subject.students.splice(subject.students.indexOf(this), 1)
         return this
+    },
+    addGrade: function(grade, subject) {
+        this.grades.push({grade: grade, subject: subject})
+    },
+    changeGrade: function(grade, subject) {
+        this.grades[this.grades.findIndex((x) => x.subject === subject)].grade = grade
+        
+    },
+    removeGrade: function(subject) {
+        this.grades = this.grades.filter((x) => x === subject)
     }
 }
 
@@ -105,6 +113,7 @@ let tuna = {
     age: "17",
     gender: 2,
     subjects: [],
+    grades: [],
     enlistToSubject: function(subject) {
         this.subjects.push(subject)
         subject.students.push(this)
@@ -114,6 +123,16 @@ let tuna = {
         this.subjects.splice(this.subjects.indexOf(subject), 1)
         subject.students.splice(subject.students.indexOf(this), 1)
         return this
+    },
+    addGrade: function(grade, subject) {
+        this.grades.push({grade: grade, subject: subject})
+    },
+    changeGrade: function(grade, subject) {
+        this.grades[this.grades.findIndex((x) => x.subject === subject)].grade = grade
+        
+    },
+    removeGrade: function(subject) {
+        this.grades = this.grades.filter((x) => x === subject)
     }
 }
 
@@ -122,6 +141,7 @@ let salomon = {
     age: "18",
     gender: 1,
     subjects: [],
+    grades: [],
     enlistToSubject: function(subject) {
         this.subjects.push(subject)
         subject.students.push(this)
@@ -131,6 +151,16 @@ let salomon = {
         this.subjects.splice(this.subjects.indexOf(subject), 1)
         subject.students.splice(subject.students.indexOf(this), 1)
         return this
+    },
+    addGrade: function(grade, subject) {
+        this.grades.push({grade: grade, subject: subject})
+    },
+    changeGrade: function(grade, subject) {
+        this.grades[this.grades.findIndex((x) => x.subject === subject)].grade = grade
+        
+    },
+    removeGrade: function(subject) {
+        this.grades = this.grades.filter((x) => x === subject)
     }
 }
 
@@ -139,6 +169,7 @@ let laxakin = {
     age: "17",
     gender: 1,
     subjects: [],
+    grades: [],
     enlistToSubject: function(subject) {
         this.subjects.push(subject)
         subject.students.push(this)
@@ -148,6 +179,16 @@ let laxakin = {
         this.subjects.splice(this.subjects.indexOf(subject), 1)
         subject.students.splice(subject.students.indexOf(this), 1)
         return this
+    },
+    addGrade: function(grade, subject) {
+        this.grades.push({grade: grade, subject: subject})
+    },
+    changeGrade: function(grade, subject) {
+        this.grades[this.grades.findIndex((x) => x.subject === subject)].grade = grade
+        
+    },
+    removeGrade: function(subject) {
+        this.grades = this.grades.filter((x) => x === subject)
     }
 }
 
@@ -156,6 +197,7 @@ let mermer = {
     age: "17",
     gender: 2,
     subjects: [],
+    grades: [],
     enlistToSubject: function(subject) {
         this.subjects.push(subject)
         subject.students.push(this)
@@ -165,6 +207,16 @@ let mermer = {
         this.subjects.splice(this.subjects.indexOf(subject), 1)
         subject.students.splice(subject.students.indexOf(this), 1)
         return this
+    },
+    addGrade: function(grade, subject) {
+        this.grades.push({grade: grade, subject: subject})
+    },
+    changeGrade: function(grade, subject) {
+        this.grades[this.grades.findIndex((x) => x.subject === subject)].grade = grade
+        
+    },
+    removeGrade: function(subject) {
+        this.grades = this.grades.filter((x) => x === subject)
     }
 }
 
@@ -194,10 +246,11 @@ let scylala = {
         return this
     },
     quitSubject: function(subject) {
-        this.subjects.splice(this.subjects.indexOf(subject), 1)
-        console.log(subject.teachers.includes(this))
-        subject.teachers.splice(subject.teachers.indexOf(this), 1)
-        return this
+        if (subject) {
+            this.subjects.splice(this.subjects.indexOf(subject), 1)
+            subject.teachers.splice(subject.teachers.indexOf(this), 1)
+            return this
+        }
     }
 }
 
@@ -264,9 +317,59 @@ let scylala = {
 // scylala.quitSubject(math)
 // console.log(scylala, math)
 
-fishwarts.teachers.push(scylala)
-scylala.addSubject(math)
-scylala.addSubject(swimming)
-console.log(fishwarts, scylala, math, swimming)
-fishwarts.fireTeacher(scylala)
-console.log(fishwarts, scylala, math, swimming)
+// 5
+
+function populate() {
+    fishwarts.students.push(blobert, laxakin, tuna, mermer, salomon)
+    fishwarts.teachers.push(krake, scylala)
+    math.addTeacher(scylala)
+    swimming.addTeacher(krake)
+    fishing.addTeacher(scylala)
+    math.addStudent(mermer)
+    math.addStudent(laxakin)
+    swimming.addStudent(tuna)
+    swimming.addStudent(mermer)
+    swimming.addStudent(salomon)
+    fishing.addStudent(blobert)
+    fishing.addStudent(tuna)
+}
+populate()
+
+// 6
+
+function displayAllStudents() {
+    for (student in fishwarts.students) {
+        console.log(fishwarts.students[student].name)
+    }
+    return fishwarts.students
+}
+
+// 1
+
+function displayAllSubjectsOfStudents(student) {
+    for (subject of student.subjects) {
+        console.log(subject.name)
+    }
+    return student.subjects
+}
+
+function displayAllStudentsEnlistedToSubject(subject) {
+    for (student of subject.students) {
+        console.log(student.name)
+    }
+    return subject.students
+}
+
+function displayAllTeachers() {
+    for (teacher in fishwarts.teachers) {
+        console.log(fishwarts.teachers[teacher].name)
+    }
+    return fishwarts.teachers
+}
+
+// 2
+
+mermer.addGrade("A", math)
+mermer.changeGrade("B", math)
+mermer.removeGrade(math)
+console.log(mermer)
