@@ -1,16 +1,6 @@
-/* Unused due to assignment requiring object literals
-class Subject {
-    students = []
-    teachers = []
-    constructor(name) {
-        this.name = name;
-    }
-}
-*/
-
 // 1
 
-let fishwarts = {
+const fishwarts = {
     name: "Fishwarts",
     students: [],
     teachers: [],
@@ -33,7 +23,7 @@ let fishwarts = {
 
 // 1
 
-let math = {
+const math = {
     name: "Math",
     students: [],
     teachers: [],
@@ -48,7 +38,7 @@ let math = {
     }
 };
 
-let fishing = {
+const fishing = {
     name: "Fishing",
     students: [],
     teachers: [],
@@ -63,7 +53,7 @@ let fishing = {
     }
 };
 
-let swimming = {
+const swimming = {
     name: "Swimming",
     students: [],
     teachers: [],
@@ -80,7 +70,7 @@ let swimming = {
 
 // 1
 
-let blobert = {
+const blobert = {
     name: "Blobert Blobfish",
     age: "17",
     gender: 1,
@@ -108,7 +98,7 @@ let blobert = {
     }
 }
 
-let tuna = {
+const tuna = {
     name: "Tuna Lisa",
     age: "17",
     gender: 2,
@@ -136,7 +126,7 @@ let tuna = {
     }
 }
 
-let salomon = {
+const salomon = {
     name: "Salomon",
     age: "18",
     gender: 1,
@@ -164,7 +154,7 @@ let salomon = {
     }
 }
 
-let laxakin = {
+const laxakin = {
     name: "Laxakin Waterwaker",
     age: "17",
     gender: 1,
@@ -192,7 +182,7 @@ let laxakin = {
     }
 }
 
-let mermer = {
+const mermer = {
     name: "Mermer Maid",
     age: "17",
     gender: 2,
@@ -222,7 +212,7 @@ let mermer = {
 
 // 2
 
-let krake = {
+const krake = {
     name: "Krake Ken",
     subjects: [],
     addSubject: function(subject) {
@@ -237,7 +227,7 @@ let krake = {
     }
 }
 
-let scylala = {
+const scylala = {
     name: "Scylala Lala",
     subjects: [],
     addSubject: function(subject) {
@@ -373,3 +363,11 @@ mermer.addGrade("A", math)
 mermer.changeGrade("B", math)
 mermer.removeGrade(math)
 console.log(mermer)
+
+
+/**
+ * Grades only need to be added to the student,
+ * any categories can be derived from there.
+ * Storing grades in a single place saves storage
+ * and makes it easier to update all grades.
+ */
